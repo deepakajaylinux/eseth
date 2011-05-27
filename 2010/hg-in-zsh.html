@@ -1,0 +1,440 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>Mercurial Info in Your Zsh Prompt &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2010" href="index.html" />
+            <link rel="prev" title="Git Info in Your Zsh Prompt" href="git-in-zsh.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="git-in-zsh.html" title="Git Info in Your Zsh Prompt"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2010</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="mercurial-info-in-your-zsh-prompt">
+<span id="post-hg-in-zsh"></span><h1>Mercurial Info in Your Zsh Prompt</h1>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="git-in-zsh.html#post-git-in-zsh"><em>Git Info in Your Zsh Prompt</em></a></p>
+</div>
+<div class="section" id="what-is-vcs-info">
+<h2>What is <tt class="docutils literal"><span class="pre">VCS_Info</span></tt>?</h2>
+<p>If you aren’t already familiar with <tt class="docutils literal"><span class="pre">VCS_Info</span></tt> in Zsh, fire up your favorite
+manpage viewer and read through the section in <em class="manpage">zshcontrib(1)</em>. It
+allows you to pull information out of a version-controlled repository and
+display that in your shell prompt.</p>
+<p>The big win for <tt class="docutils literal"><span class="pre">VCS_Info</span></tt> over other, similar solutions is that it is built
+right into Zsh and supports Bazaar, Codeville, CVS, Darcs, Git, GNU arch, GNU
+quilt, Mercurial, Monotone, Perforce, Subversion, and SVK all using the same
+configuration. You put it into your prompt once then as you <strong class="command">cd</strong>
+between your favorite git, hg, bzr, or svn local clones it Just Works®:</p>
+<p>Mercurial (using <a class="reference external" href="http://hg-git.github.com/">hg-git</a>):</p>
+<img alt="../_images/vcs-hggit.png" src="../_images/vcs-hggit.png" />
+<p>Git:</p>
+<img alt="../_images/vcs-git.png" src="../_images/vcs-git.png" />
+<p>It is also highly customizable.</p>
+<div class="section" id="vcs-info-quickstart">
+<h3><tt class="docutils literal"><span class="pre">VCS_Info</span></tt> quickstart</h3>
+<ol class="arabic">
+<li><p class="first">Put the following in your <tt class="docutils literal"><span class="pre">~/.zshrc</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre>autoload -Uz vcs_info
+zstyle <span class="s1">&#39;:vcs_info:*&#39;</span> <span class="nb">enable </span>hg git bzr svn
+</pre></div>
+</div>
+</li>
+<li><p class="first">Put <span class="target" id="index-1"></span><tt class="xref std std-envvar docutils literal"><span class="pre">${vcs_info_msg_0_}</span></tt> somewhere in your <span class="target" id="index-2"></span><tt class="xref std std-envvar docutils literal"><span class="pre">$PS1</span></tt>.</p>
+</li>
+<li><p class="first">Test it by going into a local repository directory. Your prompt should look
+something like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre>you@host ~/src/yourcode  <span class="o">(</span>hg<span class="o">)</span>-<span class="o">[</span>default<span class="o">]</span>-
+%
+</pre></div>
+</div>
+</li>
+<li><p class="first">Be amazed and suddenly feel compelled to send <a class="reference external" href="http://bewatermyfriend.org">Frank Terbeck</a> a valentine
+to say thanks for writing <tt class="docutils literal"><span class="pre">VCS_Info</span></tt>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="vcs-info-mercurial-support">
+<h2><tt class="docutils literal"><span class="pre">VCS_Info</span></tt> Mercurial Support</h2>
+<p>The first iteration of the Mercurial <tt class="docutils literal"><span class="pre">VCS_Info</span></tt> backend would display the
+changeset ID, local revision number, current branch, and the topmost applied
+<a class="reference external" href="http://mercurial.selenic.com/wiki/MqExtension">mq</a> patch. Here are the new features:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Many features in <tt class="docutils literal"><span class="pre">VCS_Info</span></tt> are disabled by default for performance
+reasons. Most of the below styles require customizing your <tt class="docutils literal"><span class="pre">formats</span></tt> and
+<tt class="docutils literal"><span class="pre">actionformats</span></tt> zstyles at least. Look at my customizations below and
+give <em class="manpage">zshcontrib(1)</em> a read before you give up or complain.</p>
+</div>
+<div class="section" id="support-for-the-bookmarks-extension">
+<h3>Support for the Bookmarks extension</h3>
+<p>Enable Mercurial <a class="reference external" href="http://mercurial.selenic.com/wiki/BookmarksExtension">bookmarks</a> by adding the style:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> get-bookmarks <span class="nb">true</span>
+</pre></div>
+</div>
+<img alt="../_images/vcs-bookmarks.png" src="../_images/vcs-bookmarks.png" />
+</div>
+<div class="section" id="show-marker-for-changes-in-the-working-directory">
+<h3>Show marker for changes in the working directory</h3>
+<p>Knowing if there are changes in your working directory at a glance can be a
+huge time saver:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> check-for-changes <span class="nb">true</span>
+</pre></div>
+</div>
+<img alt="../_images/vcs-changes.png" src="../_images/vcs-changes.png" />
+</div>
+<div class="section" id="avoid-the-overhead-of-starting-the-python-interpreter">
+<h3>Avoid the overhead of starting the Python interpreter</h3>
+<p>In very large repositories or on very slow computers, invoking Mercurial every
+time the prompt is drawn can simply be too slow. You can optionally use the
+<strong class="command">hexdump</strong> program to fetch the changeset ID instead which is lightning
+fast.</p>
+<p>For example, the NetBeans repository is 3 GB in size so to enable fast lookup
+for just that directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:hg*:netbeans&#39;</span> use-simple <span class="nb">true</span>
+</pre></div>
+</div>
+<p>Here are three time tests in the NetBeans repo to give you an idea of the speed
+difference. Note that by specifying the current revision with <tt class="docutils literal"><span class="pre">-r</span> <span class="pre">.</span></tt> causes
+Mercurial to ignore the state of the working directory which goes a little
+faster but doesn’t look for changes.</p>
+<img alt="../_images/vcs-hexdump.png" src="../_images/vcs-hexdump.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot retrieve the local revision number with hexdump.</p>
+</div>
+</div>
+<div class="section" id="display-the-current-action">
+<h3>Display the current action</h3>
+<p>Show when rebasing or merging. Define <tt class="docutils literal"><span class="pre">actionformats</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:hg*&#39;</span> actionformats <span class="s2">&quot;(%s|%a)[%i%u %b %m]&quot;</span>
+</pre></div>
+</div>
+<img alt="../_images/vcs-merging.png" src="../_images/vcs-merging.png" />
+</div>
+<div class="section" id="display-both-parents-during-a-merge">
+<h3>Display both parents during a merge</h3>
+<p>Mercurial separates multiple parents with a <tt class="docutils literal"><span class="pre">+</span></tt> by default:</p>
+<img alt="../_images/vcs-merging.png" src="../_images/vcs-merging.png" />
+<p>This doesn’t (currently) work with the <tt class="docutils literal"><span class="pre">use-simple</span></tt> setting, although I think
+the second parent hash is available with <strong class="command">hexdump</strong> so this may be
+added in the future.</p>
+</div>
+<div class="section" id="detection-for-hg-git-hgsubversion-and-hgsvn">
+<h3>Detection for <a class="reference external" href="http://hg-git.github.com/">hg-git</a>, <a class="reference external" href="http://www.bitbucket.org/durin42/hgsubversion/">hgsubversion</a>, and <a class="reference external" href="http://pypi.python.org/pypi/hgsvn/">hgsvn</a></h3>
+<p>It can be useful to see when you are in a repo created from another VCS since
+your workflow is often altered.</p>
+<img alt="../_images/vcs-hggit.png" src="../_images/vcs-hggit.png" />
+</div>
+<div class="section" id="improved-mq-display">
+<h3>Improved <a class="reference external" href="http://mercurial.selenic.com/wiki/MqExtension">mq</a> display</h3>
+<p>Show the names and count of both applied and unapplied patches. <tt class="docutils literal"><span class="pre">VCS_Info</span></tt>
+supports this same configuration for <a class="reference external" href="http://www.procode.org/stgit/">stgit</a> and <a class="reference external" href="http://savannah.nongnu.org/projects/quilt">Quilt</a> as well.</p>
+<img alt="../_images/vcs-mq.png" src="../_images/vcs-mq.png" />
+</div>
+<div class="section" id="support-for-mq-guards">
+<h3>Support for <a class="reference external" href="http://mercurial.selenic.com/wiki/MqExtension">mq</a> guards</h3>
+<p>The unapplied count now takes <a class="reference external" href="http://hgbook.red-bean.com/read/advanced-uses-of-mercurial-queues.html">guards</a> into account.</p>
+<img alt="../_images/vcs-guards.png" src="../_images/vcs-guards.png" />
+</div>
+</div>
+<div class="section" id="vcs-info-hooks">
+<h2><tt class="docutils literal"><span class="pre">VCS_Info</span></tt> Hooks</h2>
+<p>Hooks are a great and open-ended way to customize the output. The hooks
+documentation is really good and worth a read.</p>
+<p>For example, I wanted to add a marker to the display when I’m not currently on
+a branch head:</p>
+<img alt="../_images/vcs-notonbranchhead.png" src="../_images/vcs-notonbranchhead.png" />
+<p>The hook looks like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:hg*+set-message:*&#39;</span> hooks hg-storerev hg-branchhead
+
+<span class="c">### Store the localrev and global hash for use in other hooks</span>
+<span class="k">function</span> +vi-hg-storerev<span class="o">()</span> <span class="o">{</span>
+    user_data<span class="o">[</span>localrev<span class="o">]=</span><span class="k">${</span><span class="nv">hook_com</span><span class="p">[localrev]</span><span class="k">}</span>
+    user_data<span class="o">[</span><span class="nb">hash</span><span class="o">]=</span><span class="k">${</span><span class="nv">hook_com</span><span class="p">[hash]</span><span class="k">}</span>
+<span class="o">}</span>
+
+<span class="c">### Show marker when the working directory is not on a branch head</span>
+<span class="c"># This may indicate that running `hg up` will do something</span>
+<span class="k">function</span> +vi-hg-branchhead<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local </span>branchheadsfile i_tiphash i_branchname
+    <span class="nb">local</span> -a branchheads
+
+    <span class="nb">local </span><span class="nv">branchheadsfile</span><span class="o">=</span><span class="k">${</span><span class="nv">hook_com</span><span class="p">[base]</span><span class="k">}</span>/.hg/branchheads.cache
+
+    <span class="c"># Bail out if any mq patches are applied</span>
+    <span class="o">[[</span> -s <span class="k">${</span><span class="nv">hook_com</span><span class="p">[base]</span><span class="k">}</span>/.hg/patches/status <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="k">return </span>0
+
+    <span class="k">if</span> <span class="o">[[</span> -r <span class="k">${</span><span class="nv">branchheadsfile</span><span class="k">}</span> <span class="o">]]</span> ; <span class="k">then</span>
+<span class="k">        while </span><span class="nb">read</span> -r i_tiphash i_branchname ; <span class="k">do</span>
+<span class="k">            </span>branchheads+<span class="o">=(</span> <span class="nv">$i_tiphash</span> <span class="o">)</span>
+        <span class="k">done</span> &lt; <span class="k">${</span><span class="nv">branchheadsfile</span><span class="k">}</span>
+
+        <span class="k">if</span> <span class="o">[[</span> ! <span class="k">${</span><span class="nv">branchheads</span><span class="p">[(i)</span><span class="k">${</span><span class="nv">user_data</span><span class="p">[hash]</span><span class="k">}</span><span class="p">]</span><span class="k">}</span> -le <span class="k">${#</span><span class="nv">branchheads</span><span class="k">}</span> <span class="o">]]</span> ; <span class="k">then</span>
+<span class="k">            </span>hook_com<span class="o">[</span>revision<span class="o">]=</span><span class="s2">&quot;${c4}^${c2}${hook_com[revision]}&quot;</span>
+        <span class="k">fi</span>
+<span class="k">    fi</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The reason this functionality isn’t in the core backend is because the
+<tt class="file docutils literal"><span class="pre">branchheads.cache</span></tt> isn’t updated with every <strong class="command">hg</strong> operation
+so on occasion it will give a false positive. Most of the time it is Good
+Enough®.</p>
+</div>
+</div>
+<div class="section" id="putting-it-all-together">
+<h2>Putting it All Together</h2>
+<p>You can pack quite a lot of information into your prompt (if you want to):</p>
+<img alt="../_images/vcs-complete.png" src="../_images/vcs-complete.png" />
+<p>If you are interested, the entirely of my <tt class="docutils literal"><span class="pre">VCS_Info</span></tt> configuration is
+available on GitHub or BitBucket in my <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.zsh_shouse_prompt">Zsh prompt file</a>.</p>
+<p>Here are the important lines (omitting hooks and colors). <tt class="docutils literal"><span class="pre">hg*</span></tt> ensures the
+same style is applied to <tt class="docutils literal"><span class="pre">hg</span></tt> as well as variants like <tt class="docutils literal"><span class="pre">hg-git</span></tt>,
+<tt class="docutils literal"><span class="pre">hg-hgsubversion</span></tt>, etc.:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:*&#39;</span> <span class="nb">enable </span>hg git bzr svn
+zstyle <span class="s1">&#39;:vcs_info:(hg*|git*):*&#39;</span> get-revision <span class="nb">true</span>
+zstyle <span class="s1">&#39;:vcs_info:(hg*|git*):*&#39;</span> check-for-changes <span class="nb">true</span>
+
+<span class="c"># rev+changes branch misc</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*&#39;</span> formats <span class="s2">&quot;(%s)[%i%u %b %m]&quot;</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*&#39;</span> actionformats <span class="s2">&quot;(%s|%a)[%i%u %b %m]&quot;</span>
+
+<span class="c"># hash changes branch misc</span>
+zstyle <span class="s1">&#39;:vcs_info:git*&#39;</span> formats <span class="s2">&quot;(%s)[%12.12i %u %b %m]&quot;</span>
+zstyle <span class="s1">&#39;:vcs_info:git*&#39;</span> actionformats <span class="s2">&quot;(%s|%a)[%12.12i %u %b %m]&quot;</span>
+
+zstyle <span class="s1">&#39;:vcs_info:hg*:netbeans&#39;</span> use-simple <span class="nb">true</span>
+
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> get-bookmarks <span class="nb">true</span>
+
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> get-mq <span class="nb">true</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> get-unapplied <span class="nb">true</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> patch-format <span class="s2">&quot;mq(%g):%n/%c %p&quot;</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> nopatch-format <span class="s2">&quot;mq(%g):%n/%c %p&quot;</span>
+
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> unstagedstr <span class="s2">&quot;+&quot;</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> hgrevformat <span class="s2">&quot;%r&quot;</span> <span class="c"># only show local rev.</span>
+zstyle <span class="s1">&#39;:vcs_info:hg*:*&#39;</span> branchformat <span class="s2">&quot;%b&quot;</span> <span class="c"># only show branch</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="try-the-new-features-now">
+<span id="dont-wait"></span><h2>Try the New Features Now!</h2>
+<p>These new features are still unreleased (as of Zsh 4.3.10). You don’t have to
+wait for the next release of Zsh to try them. Full instructions to keep a local
+checkout from CVS are located in the <a class="reference external" href="http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob;f=Misc/vcs_info-examples">vcs_info-examples file</a>.</p>
+<p><em>tl;dr</em>:</p>
+<ol class="arabic">
+<li><p class="first">Download the <a class="reference external" href="http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=snapshot;sf=tgz">latest snapshot</a> tarball from the Git mirror and untar it.</p>
+</li>
+<li><p class="first">Put the <tt class="docutils literal"><span class="pre">Functions/VCS_Info</span></tt> directory from the archive somewhere.
+<tt class="docutils literal"><span class="pre">~/.zfuncs</span></tt> is a good place.</p>
+</li>
+<li><p class="first">Point your Zsh at that directory (requires <span class="target" id="index-3"></span><tt class="xref std std-envvar docutils literal"><span class="pre">extended_glob</span></tt> to be set):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">fpath</span><span class="o">=(</span> ~/.zfuncs ~/.zfuncs/VCS_Info/**/*~*/<span class="o">(</span>CVS<span class="o">)</span><span class="c">#(/) $fpath )</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Restart Zsh:</p>
+<div class="highlight-bash"><div class="highlight"><pre>% <span class="nb">exec </span>zsh
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 367 days ago on 2010-05-24.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">Mercurial Info in Your Zsh Prompt</a><ul>
+<li><a class="reference internal" href="#what-is-vcs-info">What is <tt class="docutils literal"><span class="pre">VCS_Info</span></tt>?</a><ul>
+<li><a class="reference internal" href="#vcs-info-quickstart"><tt class="docutils literal"><span class="pre">VCS_Info</span></tt> quickstart</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vcs-info-mercurial-support"><tt class="docutils literal"><span class="pre">VCS_Info</span></tt> Mercurial Support</a><ul>
+<li><a class="reference internal" href="#support-for-the-bookmarks-extension">Support for the Bookmarks extension</a></li>
+<li><a class="reference internal" href="#show-marker-for-changes-in-the-working-directory">Show marker for changes in the working directory</a></li>
+<li><a class="reference internal" href="#avoid-the-overhead-of-starting-the-python-interpreter">Avoid the overhead of starting the Python interpreter</a></li>
+<li><a class="reference internal" href="#display-the-current-action">Display the current action</a></li>
+<li><a class="reference internal" href="#display-both-parents-during-a-merge">Display both parents during a merge</a></li>
+<li><a class="reference internal" href="#detection-for-hg-git-hgsubversion-and-hgsvn">Detection for hg-git, hgsubversion, and hgsvn</a></li>
+<li><a class="reference internal" href="#improved-mq-display">Improved mq display</a></li>
+<li><a class="reference internal" href="#support-for-mq-guards">Support for mq guards</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vcs-info-hooks"><tt class="docutils literal"><span class="pre">VCS_Info</span></tt> Hooks</a></li>
+<li><a class="reference internal" href="#putting-it-all-together">Putting it All Together</a></li>
+<li><a class="reference internal" href="#try-the-new-features-now">Try the New Features Now!</a></li>
+</ul>
+</li>
+</ul>
+
+        <p><a href="../_sources/2010/hg-in-zsh.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2007/index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="git-in-zsh.html" title="Git Info in Your Zsh Prompt"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2010</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

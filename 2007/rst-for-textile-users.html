@@ -1,0 +1,329 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>ReST for Markdown and Textile Users &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2007" href="index.html" />
+            <link rel="next" title="RestructuredText, Markdown, and Textile (and typography)" href="rst-markdown-textile.html" />
+            <link rel="prev" title="The Mac OS X Terminal Holy Grail: mrxvt" href="osx-terminal-holy-grail.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="rst-markdown-textile.html" title="RestructuredText, Markdown, and Textile (and typography)"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="osx-terminal-holy-grail.html" title="The Mac OS X Terminal Holy Grail: mrxvt"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2007</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="rest-for-markdown-and-textile-users">
+<span id="rst-for-textile-users"></span><h1>ReST for Markdown and Textile Users</h1>
+<p id="index-0">ReStructuredText is freaking huge so users of lighter-weight markup languages
+can be easily put off. This is an <em>absolute basics</em> quickref to ReST for
+those kinds of users. Eye-ball the <a class="reference external" href="rest-for-markdown-and-textile-users.html#closing">Closing</a> at the bottom for a bit more
+perspective.</p>
+<div class="section" id="headers">
+<h2>Headers</h2>
+<p>Just use non-alphanumeric characters to underline (or under-and-overline)
+your heading. It doesn&#8217;t matter what you use, just be consistent with the
+character you use for each header level:</p>
+<div class="highlight-python"><pre>=========
+Chapter 1
+=========
+
+Section 1.1
+===========
+
+Section 1.2
+-----------
+
+Section 1.3
++++++++++++
+
+=========
+Chapter 2
+=========</pre>
+</div>
+</div>
+<div class="section" id="text-styles">
+<h2>Text Styles</h2>
+<p><em>italics</em>: <tt class="docutils literal"><span class="pre">*Italics*</span></tt></p>
+<p><strong>bold</strong>: <tt class="docutils literal"><span class="pre">**bold**</span></tt></p>
+<p>Block quotes are just:</p>
+<p>&gt; Indented paragraphs,
+&gt;
+&gt;&gt; and they may nest.</p>
+<p>Use double backticks for inline code blocks like &#8221; <tt class="docutils literal"><span class="pre">this</span> <span class="pre">example</span> <span class="pre">where</span>
+<span class="pre">otherwise</span> <span class="pre">*special</span> <span class="pre">characters*</span> <span class="pre">aren't</span> <span class="pre">processed</span></tt> &#8221;. Dig?</p>
+<div class="highlight-python"><pre>::
+
+    A paragraph containing only two colons (or ending in two colons)
+    followed by an indented text block starts a code block.  No
+    ReST processing will happen in this block, so feel free to use
+    funny characters. `!@#$%^&amp;*()_+</pre>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links</h2>
+<p>ReST will automatically hyperlink any bare URLs.
+<a class="reference external" href="http://buildabridgeoutof.her/">http://buildabridgeoutof.her/</a></p>
+<p>Inline hyperlinks can be somewhat hard to read <a class="reference external" href="http://the-meaning-of-life.info/">like this</a> surrounded by
+text:</p>
+<div class="highlight-python"><pre>Inline hyperlinks can be somewhat hard to read `like this &lt;http
+://the-meaning-of-life.info/&gt;`_ surrounded by text.</pre>
+</div>
+<p>Fortunately reference-style links <a class="reference external" href="http://the-universe-and-everything.info/">look</a> very legible in text-format. And
+can even <a class="reference external" href="http://yourockthepartythatrocksthebody.com">span multiple words</a> (like you would expect!):</p>
+<div class="highlight-python"><pre>Fortunately reference-style links look_ very legible in text-format.
+And can even `span multiple words`_ (like you would expect!).
+
+.. _span multiple words: http://yourockthepartythatrocksthebody.com
+.. _look: http://the-universe-and-everything.info/</pre>
+</div>
+</div>
+<div class="section" id="lists">
+<h2>Lists</h2>
+<p>Syntax:</p>
+<div class="highlight-python"><pre>#. Lists are a bit trickier in ReST
+#. than in Markdown or Textile
+
+#. Place a blank line
+#. between sub-lists
+
+   #.   And line the bullet up
+   #.   exactly with the farthest left column of text of the parent
+        list
+
+* Unordered lists work in
+  exactly the same way
+
+* Just be careful to line the bullets
+  up with the first text column of the parent list.
+
+  Also, you can do multi-line bullet items if you're
+  careful of the indentation.
+
+ Definition Lists are easy
+    Just indent the definition!</pre>
+</div>
+</div>
+<div class="section" id="images">
+<h2>Images</h2>
+<p>You can easily include images, along with some useful attributes (carefully
+line up subsequent lines with the parent!):</p>
+<div class="highlight-python"><pre>.. image:: http://path/to/image.png
+   :alt: alternate text
+   :class: class names</pre>
+</div>
+</div>
+<div class="section" id="tables">
+<h2>Tables</h2>
+<p>Banging out simple tables is also very quick:</p>
+<div class="highlight-python"><pre>=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======</pre>
+</div>
+</div>
+<div class="section" id="closing">
+<h2>Closing</h2>
+<p>If this quickref peaked your interest hit up the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReST specification</a>. It&#8217;s
+not very easy to read, but it&#8217;s worth it. You can use alternate syntaxes for
+marking-up lists, for example. There are many built-in mechanisms for
+marking-up meta data such as for HTML &lt;meta&gt; tags. There&#8217;s a robust footnote
+and citation syntax. ReST generates references to key elements in your
+document so you can link to them. Docutils&#8217; <tt class="docutils literal"><span class="pre">rst2html.py</span></tt> can start
+numbering headings at any level so you can seamlessly fit ReST docs into your
+site hierarchy.</p>
+<p>The reason ReST is preferable to Markdown or Textile is that it <em>can</em> be
+written as simply as the lighter-weight markup languages if you&#8217;re working on
+simple docs&#8212;but it doesn&#8217;t have to be. You may appreciate that down the
+road when you find you suddenly need one of your docs in PDF or XML format.</p>
+</div>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 1323 days ago on 2007-10-11.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">ReST for Markdown and Textile Users</a><ul>
+<li><a class="reference internal" href="#headers">Headers</a></li>
+<li><a class="reference internal" href="#text-styles">Text Styles</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
+<li><a class="reference internal" href="#lists">Lists</a></li>
+<li><a class="reference internal" href="#images">Images</a></li>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+<li><a class="reference internal" href="#closing">Closing</a></li>
+</ul>
+</li>
+</ul>
+
+        <p><a href="../_sources/2007/rst-for-textile-users.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2010/index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="rst-markdown-textile.html" title="RestructuredText, Markdown, and Textile (and typography)"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="osx-terminal-holy-grail.html" title="The Mac OS X Terminal Holy Grail: mrxvt"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2007</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

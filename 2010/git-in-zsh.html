@@ -1,0 +1,276 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>Git Info in Your Zsh Prompt &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2010" href="index.html" />
+            <link rel="next" title="Mercurial Info in Your Zsh Prompt" href="hg-in-zsh.html" />
+            <link rel="prev" title="Blogging with Sphinx" href="blogging-with-sphinx.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="hg-in-zsh.html" title="Mercurial Info in Your Zsh Prompt"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="blogging-with-sphinx.html" title="Blogging with Sphinx"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2010</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="git-info-in-your-zsh-prompt">
+<span id="post-git-in-zsh"></span><h1>Git Info in Your Zsh Prompt</h1>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="hg-in-zsh.html#post-hg-in-zsh"><em>Mercurial Info in Your Zsh Prompt</em></a></p>
+</div>
+<p>I already talked at length about <a class="reference internal" href="hg-in-zsh.html#post-hg-in-zsh"><em>my Mercurial Zsh prompt</em></a>. Well I should also show my Git prompt using the same,
+awesome <tt class="docutils literal"><span class="pre">VCS_Info</span></tt> system that is built into Zsh.</p>
+<img alt="../_images/git-prompt.png" src="../_images/git-prompt.png" />
+<p><a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.zsh_shouse_prompt">The code can be found on GitHub.</a></p>
+<div class="section" id="configuration">
+<h2>Configuration</h2>
+<p>The required configuration for Git is a little lighter than for Mercurial:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:*&#39;</span> <span class="nb">enable </span>git
+zstyle <span class="s1">&#39;:vcs_info:git*:*&#39;</span> get-revision <span class="nb">true</span>
+zstyle <span class="s1">&#39;:vcs_info:git*:*&#39;</span> check-for-changes <span class="nb">true</span>
+
+<span class="c"># hash changes branch misc</span>
+zstyle <span class="s1">&#39;:vcs_info:git*&#39;</span> formats <span class="s2">&quot;(%s) %12.12i %c%u %b%m&quot;</span>
+zstyle <span class="s1">&#39;:vcs_info:git*&#39;</span> actionformats <span class="s2">&quot;(%s|%a) %12.12i %c%u %b%m&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hooks">
+<h2>Hooks</h2>
+<p>Like with Mercurial, I’m using hooks to customize the prompt just so. Activate
+both hooks with:</p>
+<div class="highlight-bash"><div class="highlight"><pre>zstyle <span class="s1">&#39;:vcs_info:git*+set-message:*&#39;</span> hooks git-st git-stash
+</pre></div>
+</div>
+<div class="section" id="remote-branch-commits-ahead-of-and-behind">
+<h3>Remote branch &amp; commits ahead-of and behind</h3>
+<p>I find I really enjoy an at-a-glance reminder if the branch I’m working on is
+tracking a remote or not. If it is tracking a remote, it’s also a big time
+saver to see the difference between local and remote commits:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Show remote ref name and number of commits ahead-of or behind</span>
+<span class="k">function</span> +vi-git-st<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local </span>ahead behind remote
+    <span class="nb">local</span> -a gitstatus
+
+    <span class="c"># Are we on a remote-tracking branch?</span>
+    <span class="nv">remote</span><span class="o">=</span><span class="k">${$(</span>git rev-parse --verify <span class="k">${</span><span class="nv">hook_com</span><span class="p">[branch]</span><span class="k">}</span>@<span class="o">{</span>upstream<span class="o">}</span> <span class="se">\</span>
+        --symbolic-full-name 2&gt;/dev/null<span class="k">)</span><span class="p">/refs\/remotes\/</span><span class="k">}</span>
+
+    <span class="k">if</span> <span class="o">[[</span> -n <span class="k">${</span><span class="nv">remote</span><span class="k">}</span> <span class="o">]]</span> ; <span class="k">then</span>
+        <span class="c"># for git prior to 1.7</span>
+        <span class="c"># ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)</span>
+        <span class="nv">ahead</span><span class="o">=</span><span class="k">$(</span>git rev-list <span class="k">${</span><span class="nv">hook_com</span><span class="p">[branch]</span><span class="k">}</span>@<span class="o">{</span>upstream<span class="o">}</span>..HEAD 2&gt;/dev/null | wc -l<span class="k">)</span>
+        <span class="o">((</span> <span class="nv">$ahead</span> <span class="o">))</span> <span class="o">&amp;&amp;</span> gitstatus+<span class="o">=(</span> <span class="s2">&quot;${c3}+${ahead}${c2}&quot;</span> <span class="o">)</span>
+
+        <span class="c"># for git prior to 1.7</span>
+        <span class="c"># behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)</span>
+        <span class="nv">behind</span><span class="o">=</span><span class="k">$(</span>git rev-list HEAD..<span class="k">${</span><span class="nv">hook_com</span><span class="p">[branch]</span><span class="k">}</span>@<span class="o">{</span>upstream<span class="o">}</span> 2&gt;/dev/null | wc -l<span class="k">)</span>
+        <span class="o">((</span> <span class="nv">$behind</span> <span class="o">))</span> <span class="o">&amp;&amp;</span> gitstatus+<span class="o">=(</span> <span class="s2">&quot;${c4}-${behind}${c2}&quot;</span> <span class="o">)</span>
+
+        hook_com<span class="o">[</span>branch<span class="o">]=</span><span class="s2">&quot;${hook_com[branch]} [${remote} ${(j:/:)gitstatus}]&quot;</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-stashed-changes">
+<h3>Show stashed changes</h3>
+<p>I tend to stash changes on a whim and forget about them. This handy reminder
+only shows up if there is a stash:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Show count of stashed changes</span>
+<span class="k">function</span> +vi-git-stash<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local</span> -a stashes
+
+    <span class="k">if</span> <span class="o">[[</span> -s <span class="k">${</span><span class="nv">hook_com</span><span class="p">[base]</span><span class="k">}</span>/.git/refs/stash <span class="o">]]</span> ; <span class="k">then</span>
+<span class="k">        </span><span class="nv">stashes</span><span class="o">=</span><span class="k">$(</span>git stash list 2&gt;/dev/null | wc -l<span class="k">)</span>
+        hook_com<span class="o">[</span>misc<span class="o">]</span>+<span class="o">=</span><span class="s2">&quot; (${stashes} stashed)&quot;</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 367 days ago on 2010-05-24.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">Git Info in Your Zsh Prompt</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#hooks">Hooks</a><ul>
+<li><a class="reference internal" href="#remote-branch-commits-ahead-of-and-behind">Remote branch &amp; commits ahead-of and behind</a></li>
+<li><a class="reference internal" href="#show-stashed-changes">Show stashed changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <p><a href="../_sources/2010/git-in-zsh.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2007/index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="hg-in-zsh.html" title="Mercurial Info in Your Zsh Prompt"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="blogging-with-sphinx.html" title="Blogging with Sphinx"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2010</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

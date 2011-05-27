@@ -1,0 +1,365 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>The Mac OS X Terminal Holy Grail: mrxvt &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2007" href="index.html" />
+            <link rel="next" title="ReST for Markdown and Textile Users" href="rst-for-textile-users.html" />
+            <link rel="prev" title="Ninth Annual Week(end)-Long LAN Party" href="ninth-week-long-lan.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="rst-for-textile-users.html" title="ReST for Markdown and Textile Users"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="ninth-week-long-lan.html" title="Ninth Annual Week(end)-Long LAN Party"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2007</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="the-mac-os-x-terminal-holy-grail-mrxvt">
+<span id="osx-terminal-holy-grail"></span><h1>The Mac OS X Terminal Holy Grail: mrxvt</h1>
+<p id="index-0">I&#8217;ve been a bit unhappy with terminal offerings on OS X since I switched.
+I&#8217;ve spent a bit of time working with each iTerm, GLTerm, xterm, aterm,
+eterm, but always end up back with Terminal.app because it&#8217;s fast and pretty.
+My wish list has always been speed and anti-aliased fonts. I use Gnu screen
+for tabs and don&#8217;t mind using X11 coming from a Unix background. Recently I
+added 256-color support to my wish list which Terminal.app and xterm don&#8217;t
+support (neither X11.app&#8217;s version or the MacPorts version have it compiled
+in).</p>
+<p>I finally stumbled across <a class="reference external" href="http://materm.sourceforge.net/wiki/Main/Download">mrxvt</a>. It supports anti-aliased fonts,
+256-colors and it&#8217;s unbelievably fast! Eyeball the screenshot below&#8211;a
+256-color terminal is <em>so</em> worth the effort&#8211;this is mrxvt running Gnu Screen
+running Vim.</p>
+<img alt="Vim running in Gnu Screen running inside mrxvt" src="2007/mrxvt-term.png" />
+<p>Although I had to compile it myself, I had no issues with the following:
+<tt class="docutils literal"><span class="pre">./configure</span> <span class="pre">--enable-everything</span> <span class="pre">--disable-debug</span> <span class="pre">--disable-greek</span></tt>. (Install
+the <tt class="docutils literal"><span class="pre">no_debug_x</span></tt> patch if you&#8217;re compiling mrxvt-0.5.2 or it&#8217;ll be very
+slow.)</p>
+<p>I also added the following to my <tt class="docutils literal"><span class="pre">.Xresources</span></tt>:</p>
+<div class="highlight-python"><pre>! --- mrxvt settings
+mrxvt*background: black
+mrxvt*foreground: white
+mrxvt*scrollBar: false
+mrxvt*loginShell: true
+mrxvt*autohideTabbar: true
+mrxvt*syncTabTitle: true
+mrxvt*hideButtons: true
+mrxvt*cursorBlink: true
+mrxvt*font: Monaco
+mrxvt*faceSize: 11
+mrxvt*cursorColor: red
+mrxvt*xft:True
+mrxvt*xftFont: Monaco
+mrxvt*xftSize:12
+mrxvt*xftAntialias:True
+mrxvt*termName: xterm-256color
+! blue is usually too dark to see. this fixes that
+mrxvt*color4: RoyalBlue
+mrxvt*color12: RoyalBlue</pre>
+</div>
+<p>The Gnu Screen from MacPorts is already compiled with 256-color support so
+putting the following in my .screenrc was the last step:</p>
+<div class="highlight-python"><pre>###############
+# 256 colours #
+###############
+#
+#.. __: http://frexx.de/xterm-256-notes/
+#
+
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# tell screen how to set colors. AB=background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# erase background with current bg color
+defbce "on"</pre>
+</div>
+<div class="section" id="archived-comments">
+<h2>Archived Comments</h2>
+<dl class="docutils">
+<dt>Ardekantur</dt>
+<dd><p class="first">Does something special have to be done to allow mrxvt to see Mac OS X
+fonts? I just got my first Apple, and compiling mrxvt and using the
+.Xresources you’ve provided leaves me with the error messages:</p>
+<p>mrxvt: can’t load font “Monaco” mrxvt: Could not open file default.menu</p>
+<p>If this works, I’ll be very grateful. iTerm is noticeably slow.</p>
+<p class="last">Thanks!</p>
+</dd>
+<dt>whiteinge</dt>
+<dd><p class="first">Not sure about that one, Ardekantur. I have fontconfig via MacPorts
+installed, so maybe that’s it—but if so, I never manually ran or configured
+it. Have you tried re-creating your font-cache fc-cache?</p>
+<p>One other thing to check is, I seem to recall some path problem with fonts
+being in a few different places on OS X. I’ve seen suggestions that you
+create a /etc/X11/XftConfig file with the following:</p>
+<div class="highlight-python"><pre>dir "/System/Library/Fonts"
+dir "/Library/Fonts"
+dir "~/Library/Fonts"</pre>
+</div>
+<p>Then restart X. But I didn’t have that file on my system…</p>
+<p class="last">Drop another comment if any of these suggestion do or don’t pan out.</p>
+</dd>
+<dt>Ardekantur</dt>
+<dd>No luck, I’m afraid. It’s strange, though - mrxvt for me is in
+/usr/local/bin, and even if that path is set in both my .profile and
+.bash_login, X11 refuses to start a terminal that has that path. Maybe
+there’s some overreaching path problem with X11 and it not being able to
+find things.</dd>
+<dt>Ardekantur</dt>
+<dd>Got it! I think I had to install fontconfig first, and then rebuild mrxvt.
+Thanks for your help!</dd>
+<dt>whiteinge</dt>
+<dd>Awesome! Thanks for the update. I’ll have to research fontconfig now a bit…</dd>
+<dt>P.Gr.</dt>
+<dd>This has been the most helpful guide to mrxvt on Mac OS X I have found.
+Great work! I just have one question. I have installed mrxvt, macports, and
+fontconfig and all of that works. Now I would like to add one more feature
+- how do I get window transparency working in mrxvt? If I type ‘mrxvt -o
+25’ it creates a plain opaque window. I’m kind of a Unix noob, do I need
+Xcompmgr or something (and if so, how do I install it)?</dd>
+<dt>whiteinge Says:</dt>
+<dd><p class="first">To the best of my knowledge there is no way to get actual transparency in
+Apple’s X11.app because it requires XFree86 6.8 with transparency support
+built-in. Apple appears to be running XFree86 4.4 still and I’ve only heard
+rumors about X11 updates for Leopard. <a class="footnote-reference" href="#id2" id="id1">[2]</a></p>
+<p>Apparently you can get pseudo-transparency working, but I couldn’t get it
+to work very reliably. Pseudo-transparency, just in case you’re not
+familiar with it, is setting an X11 background image (you can see it if you
+enter X11.app’s full-screen mode), then the terminal program (usually
+Eterm, aterm, or mrxvt) fakes transparency by displaying the part of the
+background image that it’s covering in it’s own window. It’s an interesting
+hack, and it helps to see it in action to understand what it’s doing.</p>
+<p>If you want to try pseudo-transparency, use MacPorts to install Eterm, then
+try <tt class="docutils literal"><span class="pre">Esetroot</span> <span class="pre">-f</span> <span class="pre">/path/to/your/background/image.jpg</span></tt> then start up
+<tt class="docutils literal"><span class="pre">Eterm</span></tt>. I stopped trying to get it to work with mrxvt though since I
+couldn’t get the background image to stop changing by itself. :-(</p>
+<table class="last docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td>Side note, I just stumbled across Terminal 2 on Apple’s site. That
+should be interesting to see in November.
+<a class="reference external" href="http://www.apple.com/macosx/leopard/technology/unix.html">http://www.apple.com/macosx/leopard/technology/unix.html</a></td></tr>
+</tbody>
+</table>
+</dd>
+<dt>P.Gr. Says:</dt>
+<dd><p class="first">Cool, I got pseudo-transparency working. I like the effect. I added
+Esetroot to my .xinitrc file, it seems to load the background image
+correctly and consistently display the right one with mrxvt. Wish I knew
+how to fix your background image problem.</p>
+<p class="last">Terminal 2 looks nice. Here’s hoping they add 256-colors…</p>
+</dd>
+<dt>duckpond Says:</dt>
+<dd>One of my office machine has the xterm-256color entry in
+/usr/share/terminfo/78/, but in my newly build osx86, I don’t see ther
+terminfo xterm-256color anywhere, so I am guessing maybe I should install
+or upgrade some package to have that particular terminfo? what package
+should I reinstall?</dd>
+<dt>whiteinge Says:</dt>
+<dd><p class="first">You can try copying the xterm-256color file from one computer to the other.
+That worked for me for a while with screen-256color until MacPorts updated
+their GNU screen package.</p>
+<p class="last">In direct answer to your question: it appears that the xterm-256color file
+belongs to the ncurses package in MacPorts (ncursesw). (I’m not sure about
+Fink.)</p>
+</dd>
+<dt>duckpond Says:</dt>
+<dd><p class="first">mrxvt install was a success, vim and emacs can all work on 256 colors mode.
+for emacs, the xterm-256color.el was not there by default, you’ll need to
+drop a copy to the $EMACS_HOME/lisp/term/ directory.</p>
+<p>also installed ncursesw via MacPorts (now called DarwinPorts?), and
+terminfo for xterm-256color were installed by the package. I tried:</p>
+<p>TERM=xterm-256color vim</p>
+<p>just in the regular Terminal.app, vim then gave me a blinking screen, is
+the terminfo can only be recognized by X11 applications?</p>
+<p class="last">thanks,</p>
+</dd>
+<dt>axolx</dt>
+<dd>NO UTF8 SUPPORT? Thats is unacceptable for me in 21st century computing.
+You should note that somewhere in your article, as I took it for granted
+and spent a bunch of time setting mrxvt in my system only to find out it
+lacks UTF8 support.</dd>
+<dt>whiteinge Says:</dt>
+<dd>It’s a fair complaint; I am also looking forward to unicode support in
+mrxvt. Although I think it is a mistake to take unicode support for granted
+in a terminal environment. There is so much legacy code out there, it will
+be a long while still before command-line unicode becomes commonplace. For
+example, I see command-line encoding problems almost daily as I work (as a
+web developer) — even when using Terminal.app or other UTF-aware terminals.</dd>
+</dl>
+</div>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 1472 days ago on 2007-05-15.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">The Mac OS X Terminal Holy Grail: mrxvt</a><ul>
+<li><a class="reference internal" href="#archived-comments">Archived Comments</a></li>
+</ul>
+</li>
+</ul>
+
+        <p><a href="../_sources/2007/osx-terminal-holy-grail.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2010/index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="rst-for-textile-users.html" title="ReST for Markdown and Textile Users"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="ninth-week-long-lan.html" title="Ninth Annual Week(end)-Long LAN Party"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2007</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

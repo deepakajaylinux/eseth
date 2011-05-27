@@ -1,0 +1,264 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>Pimping out your .pythonrc.py &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2008" href="index.html" />
+            <link rel="next" title="2009" href="../2009/index.html" />
+            <link rel="prev" title="How to buy a standard in 10 days" href="buy-a-standard.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="../2009/index.html" title="2009"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="buy-a-standard.html" title="How to buy a standard in 10 days"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2008</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="pimping-out-your-pythonrc-py">
+<span id="pimping-pythonrc"></span><h1>Pimping out your .pythonrc.py</h1>
+<p id="index-0">I don&#8217;t wanna be hatin&#8217; on <a class="reference external" href="http://ipython.scipy.org/moin/">IPython</a>, but I don&#8217;t use it. I often favor fairly
+extreme minimalism in computing. Why install something if you can accomplish
+the same (or good enough) with what you have available? IPython has quite a lot
+of features and syntactic-sugar, but it is overkill for my needs. Instead I&#8217;ve
+been slowly crafting my <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.pythonrc.py">pythonrc.py</a> to give the built-in
+Python shell color, tab completion, saving and searching a history, pretty
+printing, and the ability to start an external editor.</p>
+<p>It should be said that this code is not especially interesting, and a lot of
+this is very straightforward readline configuration &#8211; but it seems that a
+lot of people are unfamiliar with the basics, so here is my set up.</p>
+<p>There are two parts. The <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.inputrc">inputrc</a> sets up the key-bindings and
+some completion options, and the <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.pythonrc.py">pythonrc.py</a> which does
+the rest.</p>
+<p>You will almost certainly want to strip things out of my <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.inputrc">inputrc</a> that you don&#8217;t use or enjoy, like vi-mode. Note the conditional for
+Python in case you want any key-bindings specific to the Python shell.</p>
+<p>The <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.inputrc">inputrc</a> should be somewhat self-explanatory. For the
+options that aren&#8217;t check out the <a class="reference external" href="http://www.network-theory.co.uk/docs/bashref/ReadlineInitFileSyntax.html">GNU Bash Reference Manual</a>. Also Google is
+your friend. For example if you want to use page-up and page-down to do
+completion from your history use the following two commands:</p>
+<div class="highlight-python"><pre>"\e[5~": history-search-backward
+"\e[6~": history-search-forward</pre>
+</div>
+<p>Now you can type in the first few characters of a previous command, hit your
+<tt class="docutils literal"><span class="pre">history-search-backward</span></tt> key and, voila, you get the full command. You can
+also search your history for a pattern using the normal keys for that &#8211; for
+vi-mode hit <tt class="docutils literal"><span class="pre">esc</span></tt> to get in Normal mode then press <tt class="docutils literal"><span class="pre">?</span></tt> followed by the
+search term. (I don&#8217;t know the search command for the regular Emacs shell
+mode.)</p>
+<p>A very cool thing about the <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.inputrc">inputrc</a> is it will also affect
+other programs that utilize readline, such as bash and the shells for SQLite,
+PostgreSQL, and MySQL.</p>
+<p>In order for the Python shell to run your <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/master/.pythonrc.py">pythonrc.py</a> file
+on startup you need to set the <tt class="docutils literal"><span class="pre">PYTHONSTARTUP</span></tt> environment variable. Place
+the following line in one of your shell startup files:</p>
+<div class="highlight-python"><pre>export PYTHONSTARTUP=$HOME/.pythonrc.py</pre>
+</div>
+<p>Now run the Python shell and you should see color and some startup messages!</p>
+<p>If you are a Django developer and <tt class="docutils literal"><span class="pre">DJANGO_SETTINGS_MODULE</span></tt> exists in your
+environment, it will import all the models in your project and set up the
+Django test environment automatically. Try it!</p>
+<div class="section" id="lastly-a-few-python-shell-tips">
+<h2>Lastly a few Python shell tips</h2>
+<ul>
+<li><p class="first">A great way to introspect an unfamiliar object is to type the object
+name followed by a dot then hit <tt class="docutils literal"><span class="pre">tab</span></tt>. You will see the methods and
+attributes for that object.</p>
+</li>
+<li><p class="first">You can get the output from the last command run with the variable
+<tt class="docutils literal"><span class="pre">_</span></tt> (underscore). For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+<span class="go">{1: 2, 3: 4}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">{1: 2, 3: 4}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use the built-in <tt class="docutils literal"><span class="pre">help()</span></tt> method to get more info on a function or
+module. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">os</span><span class="p">)</span>
+<span class="go">Help on module os:</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If you have any other tips or fixes, please let me know!</p>
+</div>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 2008 days ago on 2008.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">Pimping out your .pythonrc.py</a><ul>
+<li><a class="reference internal" href="#lastly-a-few-python-shell-tips">Lastly a few Python shell tips</a></li>
+</ul>
+</li>
+</ul>
+
+        <p><a href="../_sources/2008/pimping-pythonrc.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2007/index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2010/index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="../2009/index.html" title="2009"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="buy-a-standard.html" title="How to buy a standard in 10 days"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2008</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

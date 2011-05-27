@@ -1,0 +1,224 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>Freebase &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2007" href="index.html" />
+            <link rel="next" title="Ninth Annual Week(end)-Long LAN Party" href="ninth-week-long-lan.html" />
+            <link rel="prev" title="Learning Django with IPython" href="django-ipython.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="ninth-week-long-lan.html" title="Ninth Annual Week(end)-Long LAN Party"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="django-ipython.html" title="Learning Django with IPython"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2007</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="freebase">
+<span id="post-freebase"></span><h1>Freebase</h1>
+<p id="index-0">I&#8217;m working on a project that required a database of video games (name,
+release date, box-art, etc.). Too much information to input manually, so we
+began looking for commercial offerings. There are two players in the field:
+<a class="reference external" href="http://www.muze.com/">Muze</a> and <a class="reference external" href="http://www.allmediaguide.com/">AMG</a>.</p>
+<p>It&#8217;s quite obvious they realize they have this market cornered, their sales
+representatives are the most uncooperative people I&#8217;ve every tried to buy
+something from &#8211; AMG never even returned my two email requests nor my
+voicemail. But, hey, I&#8217;m just the code-monkey; once the money-guy got
+involved they started talking?barely.</p>
+<p>After nearly two-and-a-half weeks of trying, we finally were able to get
+pricing information. Suffice it to say, our talk of &#8216;Let&#8217;s make something
+cool.&#8217; drastically shifted to &#8216;How long can we possibly endure this expense?&#8217;
+Doubt crept into our minds as to the ultimate feasibility of the project.</p>
+<p>So we began to search for <em>any</em> possible alternatives. One interesting idea
+&#8211; querying Wikipedia &#8211; quickly lead to a very interesting possible
+solution: <a class="reference external" href="http://www.freebase.com/">Freebase</a>. A web service that offers programmatic access to a
+huge variety of data which they glean from Wikipedia, as well as other
+sources.</p>
+<p>I have fallen head-over-heels in love with this service over the last week.
+Information from their database is released under the GNU Documentation
+License (same as Wikipedia). Their API is very well documented, has many
+examples, features a <a class="reference external" href="http://www.freebase.com/view/queryeditor/">live query editor</a> (check out the <a class="reference external" href="http://dev.scissor.com/querybuilder/">QueryBuilder</a> for
+newbies), and they have ready-to-use example libraries for use with Python,
+PHP, and Perl. Queries to and from their system are formatted as <a class="reference external" href="http://en.wikipedia.org/wiki/JSON">JSON</a> and
+accessed via a <a class="reference external" href="http://en.wikipedia.org/wiki/Representational_State_Transfer">RESTful</a> URL structure. Freebase, simply, could not be
+easier to use!</p>
+<p>Freebase has listings for around 11,000 video games which doesn&#8217;t compare to
+the commercial vendor&#8217;s claim of ~45,000. But they seem to have most recent
+releases which is exactly what I need. And hey, it&#8217;d be cheaper to pay a
+high-school gamer to do data entry into Freebase&#8217;s slick web interface than
+to pay those dick-heads at Muze or AMG.</p>
+<p>For the folks behind Freebase, my hat is off to you!</p>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 1358 days ago on 2007-09-06.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">Freebase</a></li>
+</ul>
+
+        <p><a href="../_sources/2007/freebase.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2010/index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="ninth-week-long-lan.html" title="Ninth Annual Week(end)-Long LAN Party"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="django-ipython.html" title="Learning Django with IPython"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2007</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

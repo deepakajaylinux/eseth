@@ -1,0 +1,301 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>How I learned to stop worrying and love Vim buffers &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2007" href="index.html" />
+            <link rel="next" title="2008" href="../2008/index.html" />
+            <link rel="prev" title="Sling laptop bags, a review" href="sling-bags.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="../2008/index.html" title="2008"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="sling-bags.html" title="Sling laptop bags, a review"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2007</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="how-i-learned-to-stop-worrying-and-love-vim-buffers">
+<span id="vim-buffers"></span><h1>How I learned to stop worrying and love Vim buffers</h1>
+<div class="section" id="background">
+<span id="index-0"></span><h2>Background</h2>
+<p>Over the past six years I have used Vim with increasing exclusivity. I have
+read a couple books (<a class="reference external" href="http://vimdoc.sourceforge.net/htmldoc/usr_toc.html">User Manual</a>, <a class="reference external" href="http://www.bookpool.com/sm/1565924266">Learning Vi</a>) on Vim from cover-to-
+cover. But I have always tried to use Vim as though it was a modern, tabbed
+editor, <a class="reference external" href="http://www.vim.org/tips/tip.php?tip_id=173">even before it had tabs</a>. Once Vim 7 was released with support for
+actual tabs, I ecstatically dove right in. I aliased <tt class="docutils literal"><span class="pre">vim</span></tt> to <tt class="docutils literal"><span class="pre">vim</span> <span class="pre">-p</span></tt>
+and created my own MyTabLine function displaying the tab number to make it
+easier to jump from tab-to-tab, for example, <tt class="docutils literal"><span class="pre">8gt</span></tt> to jump to the eighth
+tab. But many tabs get unwieldy and Vim quickly runs out of screen space to
+display them all. It became apparent that I (and others, upon a cursory
+glance at the mailing list) was trying to force a certain, modern, usage
+pattern on tabs that did not fit the Vim editing pattern well.</p>
+<p>In Vim, a buffer is a file that you have open in the editor (even if it&#8217;s not
+currently displayed), and a window is a view of a buffer. Well tabs in Vim 7
+are really just views for windows. There isn&#8217;t a mechanism in Vim to tie a
+certain buffer to a certain tab <a class="footnote-reference" href="#id2" id="id1">[1]</a> which would fit better with the modern
+idea of tabs. This was <em>finally</em> impressed on me while watching <a class="reference external" href="http://video.google.com/videoplay?docid=2538831956647446078#1h15m">Bram
+Moolenaar describe tabs</a>: he doesn&#8217;t use them! They are really intended to
+group Vim windows without having to resort to multiple xterms or GNU Screen
+windows.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The plugin <a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=159">minibufexplorer</a> actually does a very good job of mapping
+one (virtual) tab to one buffer&#8211;which may explain why it&#8217;s the second-
+highest rated script on vim.org. I highly recommend using it as a sort of
+&#8220;training wheels&#8221; for eventually using buffers without a visual aid, as it
+allows you to see all available buffers as you edit.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-the-old-guys-use-vim">
+<h2>How the old guys use Vim</h2>
+<p>There&#8217;s a third opinion in the perpetual Emacs vs. Vim holy war written by
+one of those grumpy, uphill-both-ways, old guys <a class="footnote-reference" href="#id4" id="id3">[2]</a>. In an excellent
+writeup of his favored text editor he mentioned something that got me
+thinking: &#8220;Ed is for those who can <em>remember</em> what they are working on.&#8221;
+Certainly this is an exaggeration, but one that is rooted in the very real
+tendency of young people to succumb to the siren call of ADHD. (Not
+necessarily the actual disorder, but maybe just a faster-paced reality?) I
+realize that I lazily relied on the visible list of files that were currently
+open to know which files I was working on&#8212;even when I <em>knew</em> which files I
+was working on if I would just give it some thought.</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td><a class="reference external" href="http://www.gnu.org/fun/jokes/ed.msg.html">http://www.gnu.org/fun/jokes/ed.msg.html</a></td></tr>
+</tbody>
+</table>
+<p>So here are some tips on how to effectively use buffers in Vim, please drop
+more in the comments If you have &#8216;em. Also, never stop reading the built-in
+Vim documentation and online tips. Re-read a book on Vim every third year or
+so. Editors as old as this one have so many features you&#8217;ll never master them
+all, the more you keep trying the more efficient you&#8217;ll get at
+text-wrangling—and if you edit for a living, it&#8217;ll be well worth the time.</p>
+</div>
+<div class="section" id="vim-usage-tips-for-young-people">
+<h2>Vim Usage Tips for Young People</h2>
+<p>Start with the excellent <a class="reference external" href="http://www.vim.org/tips/tip.php?tip_id=135">Vim buffer FAQ</a>! And search other Vim tips for
+&#8216;buffer&#8217; for a lot of additional ideas.</p>
+<p>Switch to a specific (N) buffer: <tt class="docutils literal"><span class="pre">:bN</span></tt> or <tt class="docutils literal"><span class="pre">N</span></tt> <tt class="docutils literal"><span class="pre">CTRL-^</span></tt>. Or switch to a
+buffer by (partial)-name: <tt class="docutils literal"><span class="pre">:b</span></tt> <tt class="docutils literal"><span class="pre">filena&lt;CR&gt;</span></tt> for a file named
+filename.php, for example. I&#8217;m using a variant of <a class="reference external" href="http://www.vim.org/tips/tip.php?tip_id=821">tip 821</a> to quickly jump
+between buffers by pressing &lt;F2&gt; followed by a buffer number or name
+fragment: <tt class="docutils literal"><span class="pre">map</span> <span class="pre">&lt;F2&gt;</span> <span class="pre">:ls&lt;CR&gt;:b&lt;Space&gt;</span></tt></p>
+<p>Use <tt class="docutils literal"><span class="pre">:bd</span></tt> or <tt class="docutils literal"><span class="pre">:bw</span></tt> to get rid of buffers you no longer need.</p>
+<p>Configure <tt class="docutils literal"><span class="pre">:set</span> <span class="pre">path</span></tt> to useful locations for your type of editing and use
+<tt class="docutils literal"><span class="pre">:find</span></tt> <tt class="docutils literal"><span class="pre">filename</span></tt> a lot. In fact, you can start Vim from the shell to
+edit a certain file somewhere on your Vim path like this: <tt class="docutils literal"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">&quot;+find</span>
+<span class="pre">filename&quot;</span></tt>.</p>
+<p>Use the alternate buffer to quickly jump between two files: <tt class="docutils literal"><span class="pre">CTRL-^</span></tt> (or
+<tt class="docutils literal"><span class="pre">CTRL-6</span></tt> if you&#8217;re lucky) also you can do <tt class="docutils literal"><span class="pre">:b#</span></tt>. My <a class="reference external" href="../filez/prefs/vimrc">custom statusline</a>
+displays the alternate buffer filename to remind me.</p>
+<p>To open a bunch of additional files after you&#8217;ve already opened Vim use
+<tt class="docutils literal"><span class="pre">:args</span></tt> <tt class="docutils literal"><span class="pre">filename*</span></tt> or <tt class="docutils literal"><span class="pre">:argadd</span> <span class="pre">files*.py</span></tt>. Try using Vim&#8217;s
+<tt class="docutils literal"><span class="pre">:Explore</span></tt> browser or just <tt class="docutils literal"><span class="pre">:cd</span></tt> and <tt class="docutils literal"><span class="pre">:cd</span> <span class="pre">-</span></tt> around the filesystem to
+get closer to the files you need to add.</p>
+<p>Map a key to <tt class="docutils literal"><span class="pre">:ls</span></tt> or <tt class="docutils literal"><span class="pre">:args</span></tt> for quick reference when you need to see
+all the buffers you&#8217;ve got open. (Mine is F1 <tt class="docutils literal"><span class="pre">map</span></tt> <tt class="docutils literal"><span class="pre">&lt;F1&gt;</span></tt> <tt class="docutils literal"><span class="pre">:ls&lt;cr&gt;</span></tt>.)</p>
+</div>
+<div class="section" id="archived-comments">
+<h2>Archived Comments</h2>
+<dl class="docutils">
+<dt>Matt</dt>
+<dd><p class="first">Seth, you are hard core! I know enough vi[m] to get around in a pinch, but
+you have crossed over to the devotee side of the line (not that there&#8217;s
+anything wrong with that). I admire your tenacious spirit. :)</p>
+<p class="last">Oh, and I&#8217;m jealous that you get to use vim. I&#8217;m going to be even more in
+the other camp at my new job, but it pays the bills&#8211;and I should run
+something else at home just for variety.</p>
+</dd>
+<dt>whiteinge</dt>
+<dd>Using different editors &#8220;just for variety&#8221; is the real hardcore, Matt! :-)</dd>
+<dt>Peter</dt>
+<dd><p class="first">You&#8217;ve shown several nice ways of jumping between buffers. I&#8217;ve mapped ^H
+in command mode to open the list of buffers and wait for me to select a
+number and hit enter:</p>
+<p>::map ^H :ls:e #</p>
+<p class="last">Works for me.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 1508 days ago on 2007-04-09.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">How I learned to stop worrying and love Vim buffers</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#how-the-old-guys-use-vim">How the old guys use Vim</a></li>
+<li><a class="reference internal" href="#vim-usage-tips-for-young-people">Vim Usage Tips for Young People</a></li>
+<li><a class="reference internal" href="#archived-comments">Archived Comments</a></li>
+</ul>
+</li>
+</ul>
+
+        <p><a href="../_sources/2007/vim-buffers.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2006/index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2010/index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="../2008/index.html" title="2008"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="sling-bags.html" title="Sling laptop bags, a review"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2007</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>

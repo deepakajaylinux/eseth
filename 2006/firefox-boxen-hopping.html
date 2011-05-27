@@ -1,0 +1,265 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+
+        <title>Firefox and boxen-hopping &mdash; Esoteric Rubbish</title>
+
+        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS 2.0">
+        
+            <script type="text/javascript">
+                var DOCUMENTATION_OPTIONS = {
+                    URL_ROOT:    '../',
+                    VERSION:     '1.0',
+                    COLLAPSE_MODINDEX: false,
+                    FILE_SUFFIX: '.html',
+                    HAS_SOURCE:  true
+                };
+            </script>
+            <script type="text/javascript" src="../_static/jquery.js"></script>
+            <script type="text/javascript" src="../_static/underscore.js"></script>
+            <script type="text/javascript" src="../_static/doctools.js"></script>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+            <link rel="top" title="Esoteric Rubbish" href="../index.html" />
+            <link rel="up" title="2006" href="index.html" />
+            <link rel="next" title="The Problem with Macs is Apple" href="the-problem-with-macs-is-apple.html" />
+            <link rel="prev" title="Eighth Annual Week-Long LAN Party" href="eighth-week-long-lan.html" />
+        <link rel="stylesheet" href="../_static/jquery.github_badge.css?v=1" />
+        <script src="../_static/jquery.github_badge.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#github-badge').GithubBadge({
+                    login: 'whiteinge',
+                    image_path: '../_static/images/'
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            accesskey="I">index</a></li>
+        <li class="right" >
+        <a href="the-problem-with-macs-is-apple.html" title="The Problem with Macs is Apple"
+            accesskey="N">next</a> |</li>
+        <li class="right" >
+        <a href="eighth-week-long-lan.html" title="Eighth Annual Week-Long LAN Party"
+            accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" accesskey="U">2006</a> &raquo;</li> 
+    </ul>
+</div>  
+
+        <div class="document">
+                <div class="documentwrapper">
+                    <div class="bodywrapper">
+                <div class="body">
+                    
+  <div class="section" id="firefox-and-boxen-hopping">
+<span id="firefox-boxen-hopping"></span><h1>Firefox and boxen-hopping</h1>
+<div class="admonition note" id="index-0">
+<p class="first admonition-title">Note</p>
+<p>Update 2006-12-20</p>
+<p>Firefox <em>is</em> very easy to personalize via configuration files. I&#8217;ve found
+the <tt class="docutils literal"><span class="pre">userChrome.css</span></tt> and <tt class="docutils literal"><span class="pre">userPref.js</span></tt> files to be surprisingly
+capable, I&#8217;ve added them as well as my bookmarks file to my <a class="reference external" href="http://github.com/whiteinge/dotfiles/blob/6a2377c/.zshrc#L228">dotsync</a> for a (very) minimal Firefox UI footprint
+(pictured).</p>
+<p class="last">The original post follows.</p>
+</div>
+<img alt="A minimal Firefox window layout" src="2006/firefox-layout.jpg" />
+<p>The web is my platform of choice. It really boils down to simplicity in boxen
+hopping. I routinely jump between my laptop, home desktop, home server, work
+desktop, work server, and whatever other computers I happen to be building or
+working on at the moment. Having consistent configurations in all those
+locations is critical to getting any serious work done. If I need a
+calculator I don&#8217;t want to worry about starting Windows calc or using a
+Dashboard widget or Calculator.app or hoping that bc is installed on whatever
+UNIX I&#8217;m using; my preference is to hit ctrl-k and use Google Calculator
+because it&#8217;s the same for any Firefox installation. <a class="reference external" href="http://www.google.com/help/features.html">Google</a> and Firefox
+Quick Searches play a large role in making the web a viable platform.</p>
+<p>My productivity is based on two environments, Firefox and a terminal. The
+terminal environment is easy to keep up-to-date and synced between disparate
+computers due to the wonders of scripting and so-called <a class="reference external" href="http://github.com/whiteinge/dotfiles/tree/master">dotfiles</a>.
+Firefox, on the other hand, isn&#8217;t as simple to keep consistent. I tend to be a
+purist when it comes to extending most software, I dislike installing
+extensions or plug-ins especially when each new release of the base program
+requires updates to the add-on. Although Firefox is fairly decent at
+automatically updating extensions, and with the up-and-coming 1.5 release
+decent at updating itself, sometimes it corrupts preferences or an extension
+author is late to release an update. When I install a fresh copy of Firefox on
+a new computer my bookmarks is the only file that is easily put in place since
+the prefs.js file is littered with extension-specific lines.</p>
+<p>Unfortunately there are a few Firefox extensions I simply cannot live without
+and I feel strongly that all of these unless otherwise noted should be the
+default behavior for Firefox.</p>
+<dl class="docutils">
+<dt><a class="reference external" href="http://forums.mozillazine.org/viewtopic.php?t=47184">SessionSaver</a></dt>
+<dd>Opera does this, and has for some time. All browsers need to allow complete
+and instant recovery from crashes. This extension will save your window
+positions, tabs, and even what you were typing. It is imperative that this
+be built into vanilla Firefox.</dd>
+<dt><a class="reference external" href="http://extensionroom.mozdev.org/clav/#tabx">Tab X</a></dt>
+<dd>Firefox both introduced and hooked me to tabs, yet of all the tabbed
+browsers Firefox is strangely the least configurable and the least usable
+without resorting to extensions. The default behavior of having one close
+tab button on the far right that only works for your current tab is a minor
+usability issue, this little extension gives a close button on each tab.
+Safari got this right from the beginning and pulled off near-perfect tabs
+with only three checkboxes in the preferences.</dd>
+<dt><a class="reference external" href="http://cdn.mozdev.org/linkToolbar/">linkToolbar</a></dt>
+<dd>I really appreciate being able to quickly traverse up a web directory tree.
+Safari&#8217;s solution is especially elegant; if you Command-click the window
+title it will bring up a quick menu. This extension also allows you to
+navigate using the increasingly used rel header tags. Why let people with
+disabilities have all the fun?</dd>
+<dt><a class="reference external" href="https://addons.mozilla.org/firefox/394/">ViewSourceWith</a></dt>
+<dd>Web applications are starting to come of age, yet the input methods
+browsers employ are two decades in the past. ViewSourceWith allows you to
+use an external editor for textareas which will continue to be useful until
+browsers modernize, a native spell check may be a good start. I use Vim.
+(Note: this extension seems to have replaced the seldom-updated MozEx.)</dd>
+<dt><a class="reference external" href="https://addons.mozilla.org/extensions/moreinfo.php?application=firefox&amp;id=60">Web Developer Toolbar</a></dt>
+<dd>The Web Developer Toolbar is critical to my professional work. However,
+since I&#8217;m not always at work it doesn&#8217;t need to be installed on every
+computer I use. Therefore I will make an exception to this extension since
+I don&#8217;t mind installing it occasionally.</dd>
+<dt><a class="reference external" href="https://addons.mozilla.org/extensions/moreinfo.php?application=firefox&amp;id=433">Flashblock</a></dt>
+<dd>Unfortunately this extension is a must on the Macintosh otherwise
+Flash-heavy sites can make your computer completely unusable. This
+extension lets you start Flash animations selectively. Again, this
+extension deserves exception since it is hardly Mozilla&#8217;s fault that
+<a class="reference internal" href="../2004/yeti-gore.html#yeti-gore"><em>the OS X Flash player sucks</em></a>.</dd>
+</dl>
+</div>
+
+
+                </div>
+
+                <div class="body summary">
+                    
+                    <p>Posted 1883 days ago on 2006-03-30.</p>
+                    
+                </div>
+                    <div id="disqus_thread" class="body comments"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'esotericrubbish'; // required: replace example with your forum shortname
+
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        // var disqus_identifier = 'unique_dynamic_id_1234';
+                        // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/whiteinge.jpg" alt="Logo"/>
+        </a> Seth House</p>
+
+        
+        <h3>This Page</h3>
+        <ul>
+<li><a class="reference internal" href="#">Firefox and boxen-hopping</a></li>
+</ul>
+
+        <p><a href="../_sources/2006/firefox-boxen-hopping.txt"
+                rel="nofollow">Show Source</a></p>
+
+        <h3>Posts by Tag</h3>
+
+        
+
+        <h3>Posts by Date</h3>
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../2004/index.html">2004</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2005/index.html">2005</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2006</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2007/index.html">2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2008/index.html">2008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2009/index.html">2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2010/index.html">2010</a></li>
+</ul>
+
+        <div id="searchbox" style="display: none">
+            <h3>Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+
+        <h3>Related Sites</h3>
+        <p><a href="http://oalug.com/">the Ogden Area Linux User Group</a></p>
+        <div id="github-badge"></div>
+    </div>
+</div>
+            <div class="clearer"></div>
+        </div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+        <a href="../genindex.html" title="General Index"
+            >index</a></li>
+        <li class="right" >
+        <a href="the-problem-with-macs-is-apple.html" title="The Problem with Macs is Apple"
+            >next</a> |</li>
+        <li class="right" >
+        <a href="eighth-week-long-lan.html" title="Eighth Annual Week-Long LAN Party"
+            >previous</a> |</li>
+        <li><a href="../index.html">Esoteric Rubbish</a> &raquo;</li>
+        <li><a href="index.html" >2006</a> &raquo;</li> 
+    </ul>
+</div>
+        <div class="footer">
+            &copy; <a href="http://google.com/profiles/whiteinge" rel="me">Copyright 2009, Seth House</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
+                <img alt="Creative Commons License" style="border-width:0"
+                    src="http://creativecommons.org/images/public/somerights20.png">
+            </a>
+        </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12716924-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </body>
+</html>
