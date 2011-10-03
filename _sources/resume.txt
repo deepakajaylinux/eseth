@@ -21,17 +21,17 @@ Employment
 ==========
 
 SendOutCards : October 2009–Current
-    * Technical Coordinator for a team of eleven.
-    * Release manager. Responsible for deploying weekly code releases to the
-      production servers.
-    * Devops. Responsible for scripting, building, and configuring all
-      application-level software on the production, staging, and development
-      servers.
-    * Wrote a two-click installer for the creation and configuration of a
-      virtual-machine to provide a consistent and destructible local
-      development environment for all team members.
-    * Wrote over 8000 words of documentation on development workflow, release
-      instructions, and style guide.
+    * Promoted to Technical Coordinator then promoted to Programming Manager
+      for a team of eleven.
+    * Developed a consistent development environment for the team.
+    * Instituted a branching and code deployment workflow to reduce bugs making
+      it to production.
+    * Responsible for deploying weekly code releases to the production servers.
+    * Wrote documentation from scratch on the development workflow, development
+      environment, release instructions, as well as a style guide.
+    * Responsible for application-level server configuration and maintenance.
+    * Instituted a no-features/no-bugfixes without tests policy.
+    * Developed a build server and code deployment infrastructure.
 
 .. Utah Saves : Contract
     * Developed robust custom content management system from scratch.
@@ -110,5 +110,5 @@ My leisure time is usually spent swimming or running, reading about typography,
 or trying to avoid YASD in NetHack. The Web is also my hobby. I spend time
 every day to keep abreast of the latest techniques and developments.
 
-I am President of the Ogden Area Linux User Group, and active with the Utah
-Open Source Foundation and the Utah Python User Group.
+I am President of the Ogden Area Linux User Group and Co-President of the Utah
+Python User Group.
