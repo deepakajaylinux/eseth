@@ -203,13 +203,13 @@ them to the <tt class="docutils literal"><span class="pre">precmd_functions</spa
 ~  % <span class="nb">echo</span> <span class="nv">$GREP_OPTIONS</span>
 --color --exclude-dir<span class="o">=</span>.svn --exclude-dir<span class="o">=</span>.hg --exclude-dir<span class="o">=</span>.git
 ~  % <span class="nb">cd</span> ~/path/to/myproject
-% cat .grepoptions                                                                                                                       <span class="o">(</span>git<span class="o">)</span> 611ac627 ? @<span class="o">{</span>u<span class="o">}</span>+2
+% cat .grepoptions
 <span class="c"># Don&#39;t grep any minified JavaScript files</span>
 --exclude<span class="o">=</span><span class="se">\*</span>min.js
 
 <span class="c"># Don&#39;t grep third-party libs</span>
 --exclude-dir<span class="o">=</span>lib
-% <span class="nb">echo</span> <span class="nv">$GREP_OPTIONS</span>                                                                                                                     <span class="o">(</span>git<span class="o">)</span> 611ac627 ? @<span class="o">{</span>u<span class="o">}</span>+2
+% <span class="nb">echo</span> <span class="nv">$GREP_OPTIONS</span>
 --color --exclude-dir<span class="o">=</span>.svn --exclude-dir<span class="o">=</span>.hg --exclude-dir<span class="o">=</span>.git --exclude<span class="o">=</span><span class="se">\*</span>min.js --exclude-dir<span class="o">=</span>lib
 </pre></div>
 </div>
@@ -220,7 +220,7 @@ them to the <tt class="docutils literal"><span class="pre">precmd_functions</spa
 
                 
                 <div class="summary">
-                    <p>Posted 0 days ago on 2013-04-28.</p>
+                    <p>Posted 1 days ago on 2013-04-28.</p>
                 </div>
                 
 
