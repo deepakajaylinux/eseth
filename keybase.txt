@@ -1,0 +1,64 @@
+==================================================================
+https://keybase.io/whiteinge
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://eseth.org
+  * I am whiteinge (https://keybase.io/whiteinge) on keybase.
+  * I have a public key with fingerprint 22CA 731F 6E18 4DA6 A087  7EA5 981A 9910 15ED 347D
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "22ca731f6e184da6a0877ea5981a991015ed347d",
+            "host": "keybase.io",
+            "key_id": "981A991015ED347D",
+            "uid": "85ad3cce4d3a20a4a784043a836c0800",
+            "username": "whiteinge"
+        },
+        "service": {
+            "hostname": "eseth.org",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1397172558,
+    "expire_in": 157680000,
+    "prev": "00d5c3b04374e7732dbdfdc1f6c330ff83080d66ff1c138d6b39af279438c3b2",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owE1kVtIFFEYx3dXK1PCTcgiF6JZDMVlmdkzuzO75YOXbUvLxJIeFLYzM2d2x8vO
+NjNashoGGijkWkE3xEgjYimhh4weuoBWZlhYJuZ6T9AuIr6GRGfMng7n+37///f/
+zunckWAwGW/uvWXetUI3Gd+/WuUMJ33ZJRGCk4UGwhMhqtHGIUqhAFLCihTSCA/h
+cPCQAZToQhRLC9AFSZZhEHS6WQq63RRJOZEAaEYgbERQVnUFtuGgiuySjGv44pcE
+XMV83j/eW4j5Qtyr22iwTigAnke0AKCDhDRkWJqkAWSBiydZktRBFSkhWIswfS4o
+aUgPSDTZCFyul3ikh9ZnbyJIRVrQLisBrAwrsibzcg0uBzUt7NFVWkN4wwlx/k0D
+PyeFBGyKBfVIUSU5RHgoTPKapDtSwM1QjMPpZG0EOh+WFOSXdMLJuHA+ktTHoHps
+SZKCkwccTs/QiGGAQ+AEUeDx4/EAkKLIAryQ4HKJIsVTgBVcHHBD0cG4acBinYPQ
+VzobkgkPjWPCALZUpUAIanUK3rfNaEk0GE2GrVtM+r8Zkreb///mt+kkQ4tvfDKp
+Z0haKo/Pxq4XlWVcKWi1eM3sWlPmnqyvQa9tvepyMVdQcqyWrq7oLNp5Lw7Usqe/
+/0wtsFOe5TP5F2aspQNwzGcfrEosPVrwuHm/dSZhgi8eWDw9nfaivCN1JSruXqB6
+2x9ETafSLOaXdxaTHy1X5Fgj60TjJXGy8kB6T3Ov9wRYzenP3tbPWogBW+Q+8yX6
+ybQ0P2wdbcx9/mys+65h30h01hdpnu+OP4w3hDtH1I+FffbBn5VvY/yR4wfzb4+m
+z81NpHYczqu52peb9jlFykh4d6gr2n7xTVvS9zXlSZH2Y7hLXB9/3VoFPmRmrf6K
+3ehpSRm69hc=
+=bvk+
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/whiteinge
+
+==================================================================
